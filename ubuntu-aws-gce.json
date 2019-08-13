@@ -7,8 +7,15 @@
         "gce_service_account": "/Users/allaneayrs/.config/gcloud/application_default_credentials.json",
         "gce_project_id": "my-test-project-230915",
         "gce_region":     "us-west1",
-        "gce_zone":       "us-west1-b"
-
+        "gce_zone":       "us-west1-b",
+        "az_location": "West US",
+        "az_client_id": "503b478f-86f0-44af-8020-4eb825038f2c",
+        "az_client_secret": "mypackersecret12255",
+        "az_object_id": "7599635d-3c1f-48c0-8bea-d734075792a8",
+        "az_subscription_id": "786ad6c0-a732-4491-b943-713bb8913761",
+        "az_tenant_id": "b167c175-d18a-4b4e-aac0-6dbeb6d00548",
+        "az_resource_group_name": "mynewpackerbuild",
+        "az_storage_account": "mynewpackerbuild"
     },
     "builders": [
         {
@@ -62,7 +69,22 @@
             "disk_size": 16,
             "disk_type": "pd-ssd",
             "ssh_username": "root",
-            "type": "googlecompute",
+            "type": "googlecompute"
+        },
+        {
+            "type": "azure-arm",
+            "name": "{{user `base_name`}}1804-az",
+            "location": "{{user `az_location`}}",
+            "client_id": "{{user `az_client_id`}}",
+            "client_secret": "{{user `az_client_secret`}}",
+            "tenant_id": "{{user `az_tenant_id`}}",
+            "subscription_id": "{{user `az_subscription_id`}}",
+            "managed_image_resource_group_name": "{{user `az_resource_group_name`}}",
+            "managed_image_name": "packer-ub1804-demo-{{timestamp}}",
+            "os_type": "Linux",
+            "image_publisher": "Canonical",
+            "image_offer": "UbuntuServer",
+            "image_sku": "18.04-LTS"
         }       
     ],
     "provisioners": [
